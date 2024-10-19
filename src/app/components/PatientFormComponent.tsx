@@ -61,7 +61,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
           type="date"
           name="dateOfBirth"
           className="p-3 rounded-lg w-full bg-white bg-opacity-20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          value={formState.dateOfBirth ? formState.dateOfBirth.toISOString().substring(0, 10) : ''}
+          value={formState.dateOfBirth || ''}
           onChange={handleInputChange}
         />
       </div>

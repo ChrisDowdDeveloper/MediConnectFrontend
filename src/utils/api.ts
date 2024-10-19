@@ -1,5 +1,5 @@
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-
+//const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+const backendUrl = 'http://localhost:5051/api';
 export const login = async (email: string, password: string) => {
     const response = await fetch(`${backendUrl}/auth/login`, {
       method: 'POST',
@@ -31,4 +31,20 @@ export const login = async (email: string, password: string) => {
     const data = await response.json();
     return data;
   };
-  
+
+export const registerPatient = async(patientData: any) => {
+  const response = await fetch(`${backendUrl}/Patient`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(patientData),
+  });
+
+  if(!response.ok) {
+    throw new Error('Registration failed');
+  }
+
+  const result = await response.json();
+  return result;
+}

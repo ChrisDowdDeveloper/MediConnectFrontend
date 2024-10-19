@@ -12,11 +12,14 @@ const RegisterPage = () => {
   const [formState, setFormState] = useState<PatientFormState>({
     firstName: '',
     lastName: '',
-    dateOfBirth: null,
+    dateOfBirth: '',
     gender: '',
     address: '',
     email: '',
-    password: ''
+    password: '',
+    emergencyContactFirstName: '',
+    emergencyContactLastName: '',
+    emergencyContactPhoneNumber: ''
   });
 
   const [addressFields, setAddressFields] = useState({
@@ -58,18 +61,13 @@ const RegisterPage = () => {
   const handleRegister = async() => {
     const { street, city, state, zipCode } = addressFields;
     const fullAddress = `${street}, ${city}, ${state} ${zipCode}`;
-
+  
     const finalFormState = {
       ...formState,
       address: fullAddress,
     };
-
-    try {
-      await registerPatient(finalFormState);
-      router.push('/login');
-    } catch(e) {
-      alert('Registration failed');
-    }
+    localStorage.setItem('patientInfo', JSON.stringify(finalFormState));
+    router.push('register/emergency-contact');
   };
 
   return (
