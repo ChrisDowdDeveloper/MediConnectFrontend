@@ -1,9 +1,9 @@
-import { PatientFormState } from '@/types/patientFormTypes';
+import { DoctorFormState } from '@/types/patientFormTypes';
 import { states } from '@/utils/states';
 import React from 'react';
 
 interface FormComponentProps {
-  formState: PatientFormState;
+  formState: DoctorFormState;
   addressFields: {
     street: string;
     city: string;
@@ -17,7 +17,7 @@ interface FormComponentProps {
   onSubmit: () => void;
 }
 
-const PatientFormComponent: React.FC<FormComponentProps> = ({
+const DoctorFormComponent: React.FC<FormComponentProps> = ({
   formState,
   addressFields,
   handleInputChange,
@@ -54,32 +54,43 @@ const PatientFormComponent: React.FC<FormComponentProps> = ({
         </div>
       </div>
 
-      {/* Date of Birth */}
+      {/* Specialty */}
       <div className="mb-1">
-        <label className="block text-white text-lg mb-1 font-bold">Date of Birth:</label>
+        <label className="block text-white text-lg mb-1 font-bold">Specialty:</label>
         <input
-          type="date"
-          name="dateOfBirth"
+          type="text"
+          name="specialty"
+          placeholder='Specialty'
           className="p-3 rounded-lg w-full bg-white bg-opacity-20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          value={formState.dateOfBirth || ''}
+          value={formState.specialty || ''}
           onChange={handleInputChange}
         />
       </div>
 
-      {/* Gender */}
+      {/* UserName */}
       <div className="mb-1">
-        <label className="block text-white text-lg mb-1 font-bold">Gender:</label>
-        <select
-          className="p-3 rounded-lg w-full bg-white bg-opacity-20 text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          value={formState.gender}
-          name="gender"
-          onChange={handleSelectChange}
-        >
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="preferNotSay">Prefer Not Say</option>
-          <option value="other">Other</option>
-        </select>
+        <label className="block text-white text-lg mb-1 font-bold">Username:</label>
+        <input
+          type="text"
+          name="userName"
+          placeholder='Username'
+          className="p-3 rounded-lg w-full bg-white bg-opacity-20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          value={formState.userName || ''}
+          onChange={handleInputChange}
+        />
+      </div>
+
+      {/* Years of Experience */}
+      <div className="mb-1">
+        <label className="block text-white text-lg mb-1 font-bold">Years of Professional Experience:</label>
+        <input
+          type="number"
+          name="yearsOfExperience"
+          placeholder='Years of Experience'
+          className="p-3 rounded-lg w-full bg-white bg-opacity-20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          value={formState.yearsOfExperience || 0}
+          onChange={handleInputChange}
+        />
       </div>
 
       {/* Address Fields */}
@@ -177,4 +188,4 @@ const PatientFormComponent: React.FC<FormComponentProps> = ({
   );
 };
 
-export default PatientFormComponent;
+export default DoctorFormComponent;

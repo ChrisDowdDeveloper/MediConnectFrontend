@@ -5,14 +5,14 @@ import { useRouter } from 'next/navigation';
 import { login } from '../../utils/api';
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
+  const [userNameOrEmail, setUserNameOrEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const data = await login(email, password);
+      const data = await login(userNameOrEmail, password);
       document.cookie = `token=${data.token}; path=/`;
       router.push('/patients/dashboard');
     } catch (error) {
@@ -38,8 +38,8 @@ const LoginPage = () => {
           type="email"
           placeholder="Email"
           className="p-3 rounded-lg w-full bg-white bg-opacity-20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={userNameOrEmail}
+          onChange={(e) => setUserNameOrEmail(e.target.value)}
         />
       </div>
       <div className="mb-6">

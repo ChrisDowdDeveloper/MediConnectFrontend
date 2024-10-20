@@ -10,3 +10,15 @@ export interface PatientFormState {
     emergencyContactLastName: string;
     emergencyContactPhoneNumber: string;
 }
+
+export interface DoctorFormState {
+    availability: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    specialty: string;
+    officeAddress: string;
+    password: string;
+    userName: string;
+    yearsOfExperience: number;
+}

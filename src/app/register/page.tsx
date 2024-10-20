@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { login } from '../../utils/api';
-import FormComponent from '../components/PatientFormComponent';
 import { PatientFormState } from '@/types/patientFormTypes';
+import PatientFormComponent from '../components/PatientFormComponent';
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -13,7 +12,7 @@ const RegisterPage = () => {
     firstName: '',
     lastName: '',
     dateOfBirth: '',
-    gender: '',
+    gender: 'male',
     address: '',
     email: '',
     password: '',
@@ -39,6 +38,7 @@ const RegisterPage = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log(name + ' ' + value);
     setFormState({
       ...formState,
       [name]: value,
@@ -47,6 +47,7 @@ const RegisterPage = () => {
   
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
+    console.log(name + ' ' + value);
     setFormState({
       ...formState,
       [name]: value,
@@ -81,7 +82,7 @@ const RegisterPage = () => {
         <h1 className="text-4xl text-white">MediConnect</h1>
       </div>
       <div className="relative bg-blue-800 bg-opacity-40 backdrop-blur-lg rounded-3xl p-11 text-center z-10 max-w-md mx-auto">
-        <FormComponent 
+        <PatientFormComponent
           formState={formState}
           handleInputChange={handleInputChange}
           handleSelectChange={handleSelectChange}
