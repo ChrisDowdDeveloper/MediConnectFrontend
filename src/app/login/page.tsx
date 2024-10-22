@@ -14,7 +14,7 @@ const LoginPage = () => {
     try {
       const data = await login(userNameOrEmail, password);
       document.cookie = `token=${data.token}; path=/`;
-      router.push('/patients/dashboard');
+      router.push('/patient/dashboard');
     } catch (error) {
       alert('Login failed');
     }

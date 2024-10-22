@@ -1,6 +1,28 @@
-import React from 'react';
+"use client";
+
+import PatientAppointmentCard from '@/app/components/patientComponents/PatientAppointmentCard';
+import { fetchPatientById } from '@/utils/api';
+import React, { useEffect, useState } from 'react';
 
 const PatientHomePage = () => {
+  const [patient, setPatient] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchPatientData = async() => {
+      try {
+        const patientData = await fetchPatientById();
+        setPatient(patientData);
+      } catch (err) {
+        setError({ 'Error': err });
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPatientData();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-blue-600 text-white p-6 shadow-md">
@@ -37,21 +59,7 @@ const PatientHomePage = () => {
             *FIXME - API call to get upcoming appointments
         */}
         <section className="bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-xl font-bold mb-4">Upcoming Appointments</h2>
-          <div className="space-y-4">
-            {/* 
-                !*FIXME - Move this to a separate card
-            */}
-            <div className="p-4 border border-gray-200 rounded-lg flex justify-between items-center">
-              <div>
-                <p className="text-lg font-semibold">Dr. Jane Doe</p>
-                <p className="text-gray-500">October 25, 2024 - 10:00 AM</p>
-              </div>
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                View Details
-              </button>
-            </div>
-          </div>
+          <PatientAppointmentCard />
         </section>
       </main>
     </div>
