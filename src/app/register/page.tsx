@@ -38,7 +38,6 @@ const RegisterPage = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log(name + ' ' + value);
     setFormState({
       ...formState,
       [name]: value,
@@ -47,7 +46,6 @@ const RegisterPage = () => {
   
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
-    console.log(name + ' ' + value);
     setFormState({
       ...formState,
       [name]: value,

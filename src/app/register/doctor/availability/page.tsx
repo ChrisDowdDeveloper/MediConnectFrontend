@@ -59,8 +59,6 @@ const DoctorAvailabilityForm = () => {
         ...restDoctorInfo,
       };
 
-    console.log(finalData)
-
     try {
       await registerDoctor(finalData);
       router.push('/login');

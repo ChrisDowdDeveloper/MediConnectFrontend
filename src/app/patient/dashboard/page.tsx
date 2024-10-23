@@ -1,13 +1,20 @@
 "use client";
 
+import PastAppointmentCard from '@/app/components/patientComponents/PastAppointmentCard';
 import PatientAppointmentCard from '@/app/components/patientComponents/PatientAppointmentCard';
+import PatientHeader from '@/app/components/patientComponents/PatientHeader';
+import Loader from '@/app/components/shared/Loader';
 import { fetchPatientById } from '@/utils/api';
 import React, { useEffect, useState } from 'react';
+
+type ErrorState = {
+  message: string;
+};
 
 const PatientHomePage = () => {
   const [patient, setPatient] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<ErrorState | null>(null);
 
   useEffect(() => {
     const fetchPatientData = async() => {
@@ -15,7 +22,11 @@ const PatientHomePage = () => {
         const patientData = await fetchPatientById();
         setPatient(patientData);
       } catch (err) {
-        setError({ 'Error': err });
+        if (err instanceof Error) {
+          setError({ message: err.message });
+        } else {
+          setError({ message: "An unknown error occurred" });
+        }
       } finally {
         setLoading(false);
       }
@@ -23,43 +34,28 @@ const PatientHomePage = () => {
     fetchPatientData();
   }, []);
 
+  if (loading === true) {
+    return (
+      <div>
+        <Loader
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-blue-600 text-white p-6 shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-3xl font-bold">MediConnect</h1>
-          <nav>
-            <ul className="flex space-x-6">
-              <li><a href="/profile" className="hover:underline">Profile</a></li>
-              <li><a href="/appointments" className="hover:underline">Appointments</a></li>
-              <li><a href="/notifications" className="hover:underline">Notifications</a></li>
-            </ul>
-          </nav>
-        </div>
+        <PatientHeader />
       </header>
 
-      {/* Main Content */}
       <main className="container mx-auto py-8">
-        {/*
-            !*FIXME - API call to get the doctor
-        */}
         <section className="bg-white p-6 rounded-lg shadow-lg mb-8">
-          <h2 className="text-xl font-bold mb-4">Your Primary Doctor:</h2>
-          <div className="flex items-center space-x-4">
-            <img src="/doctor-placeholder.jpg" alt="Doctor's Photo" className="w-16 h-16 rounded-full" />
-            <div>
-              <p className="text-lg font-semibold">Dr. Jane Doe</p>
-              <p className="text-gray-500">Cardiologist</p>
-              <p className="text-gray-500">Email: jane.doe@example.com</p>
-            </div>
-          </div>
-        </section>
+          <PatientAppointmentCard patient={patient}/>
+        </section >
 
-        {/* !
-            *FIXME - API call to get upcoming appointments
-        */}
-        <section className="bg-white p-6 rounded-lg shadow-lg">
-          <PatientAppointmentCard />
+        <section className="bg-white p-6 rounded-lg shadow-lg mb-8">
+          <PastAppointmentCard patient={patient}/>
         </section>
       </main>
     </div>

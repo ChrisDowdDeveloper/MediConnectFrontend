@@ -5,7 +5,7 @@ interface PatientAppointmentCardProps {
   patient: Patient | null;
 }
 
-const PatientAppointmentCard: React.FC<PatientAppointmentCardProps> = ({ patient }) => {
+const PastAppointmentCard: React.FC<PatientAppointmentCardProps> = ({ patient }) => {
   if (!patient) {
     return <div>No patient information available</div>;
   }
@@ -13,17 +13,17 @@ const PatientAppointmentCard: React.FC<PatientAppointmentCardProps> = ({ patient
   if(patient.appointments.length == 0) {
     return (
       <div>
-        <h2><b>Future Appointments for {patient.firstName} {patient.lastName}</b></h2>
-        No appointments scheduled yet
+        <h2><b>Past Appointments for {patient.firstName} {patient.lastName}</b></h2>
+        No past appointments available
       </div>
     )
   }
 
   return (
     <div>
-      <h2>Future Appointments for {patient.firstName} {patient.lastName}</h2>
+      <h2>Past Appointments for {patient.firstName} {patient.lastName}</h2>
       <ul>
-        {patient.appointments.map((appointment, index) => (
+        {patient.pastAppointments.map((appointment, index) => (
           <li key={index}>
             {appointment.appointmentDateTime.toLocaleDateString()} with {appointment.doctorId}
           </li>
@@ -33,4 +33,4 @@ const PatientAppointmentCard: React.FC<PatientAppointmentCardProps> = ({ patient
   );
 };
 
-export default PatientAppointmentCard;
+export default PastAppointmentCard;

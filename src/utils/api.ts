@@ -39,7 +39,6 @@ export const login = async (userNameOrEmail: string, password: string) => {
   Cookies.set('token', token, {expires: 1});
 
   const patientId = getIdFromToken();
-  console.log(patientId);
 
   return data;
 };
@@ -94,7 +93,6 @@ export const fetchUpcomingAppointments = async(patientId: string) => {
 
 export const fetchPatientById = async() => {
   const token = Cookies.get('token');
-  console.log(token)
 
   if(!token) {
     throw new Error('No token found');
@@ -122,7 +120,6 @@ export const fetchPatientById = async() => {
  * Doctor API Calls
 */
 export const registerDoctor = async(doctorData: any) => {
-  console.log(doctorData)
   const response = await fetch(`${backendUrl}/doctor`, {
     method: 'POST',
     headers: {
