@@ -5,6 +5,7 @@ import PatientAppointmentCard from '@/app/components/patientComponents/PatientAp
 import PatientHeader from '@/app/components/patientComponents/PatientHeader';
 import Loader from '@/app/components/shared/Loader';
 import { fetchPatientById } from '@/utils/api';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 type ErrorState = {
@@ -15,6 +16,7 @@ const PatientHomePage = () => {
   const [patient, setPatient] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ErrorState | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchPatientData = async() => {
@@ -50,10 +52,17 @@ const PatientHomePage = () => {
       </header>
 
       <main className="container mx-auto py-8">
+        <div className='mb-3 flex flex-row justify-between'>
+          <h1 className='text-3xl font-bold'>Upcoming Appointments</h1>
+          <button className='bg-green-600 px-8 text-center rounded-2xl text-white font-semibold' onClick={() => router.push('/patient/new-appointment')}>Create Appointment</button>
+        </div>
         <section className="bg-white p-6 rounded-lg shadow-lg mb-8">
           <PatientAppointmentCard patient={patient}/>
         </section >
 
+        <div className='mb-3'>
+          <h1 className='text-3xl font-bold'>Past Appointments</h1>
+        </div>
         <section className="bg-white p-6 rounded-lg shadow-lg mb-8">
           <PastAppointmentCard patient={patient}/>
         </section>

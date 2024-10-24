@@ -13,14 +13,14 @@ const PatientAppointmentCard: React.FC<PatientAppointmentCardProps> = ({ patient
   if(patient.appointments.length == 0) {
     return (
       <div>
-        <h2><b>Future Appointments for {patient.firstName} {patient.lastName}</b></h2>
+        <h2><b>Appointments for {patient.firstName} {patient.lastName}</b></h2>
         No appointments scheduled yet
       </div>
     )
   }
 
   return (
-    <div>
+    <>
       <h2>Future Appointments for {patient.firstName} {patient.lastName}</h2>
       <ul>
         {patient.appointments.map((appointment, index) => (
@@ -29,7 +29,7 @@ const PatientAppointmentCard: React.FC<PatientAppointmentCardProps> = ({ patient
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 };
 

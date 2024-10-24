@@ -135,3 +135,27 @@ export const registerDoctor = async(doctorData: any) => {
   const result = await response.json();
   return result;
 }
+
+export const fetchDoctors = async() => {
+  const token = Cookies.get('token');
+
+  if(!token) {
+    throw new Error('No token found');
+  }
+
+  const response = await fetch(`${backendUrl}/doctor`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+  });
+
+  if(!response.ok) {
+    throw new Error('Failed to fetch doctors');
+  }
+
+  const doctors = await response.json();
+  console.log(doctors)
+  return doctors;
+}
