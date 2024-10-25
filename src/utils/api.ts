@@ -120,6 +120,7 @@ export const fetchPatientById = async() => {
  * Doctor API Calls
 */
 export const registerDoctor = async(doctorData: any) => {
+  doctorData.availability = "none";
   const response = await fetch(`${backendUrl}/doctor`, {
     method: 'POST',
     headers: {

@@ -1,6 +1,8 @@
 import { DoctorFormState } from '@/types/patientFormTypes';
 import { states } from '@/utils/states';
-import React from 'react';
+import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 interface FormComponentProps {
   formState: DoctorFormState;
@@ -8,7 +10,7 @@ interface FormComponentProps {
     street: string;
     city: string;
     state: string;
-    zipCode: string;
+    zipCode: string; 
   };
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -26,8 +28,16 @@ const DoctorFormComponent: React.FC<FormComponentProps> = ({
   buttonText,
   onSubmit,
 }) => {
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
   return (
     <form onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
+      
       {/* First Name and Last Name */}
       <div className='flex flex-row'>
         <div className="mr-2 mb-1">
@@ -107,6 +117,7 @@ const DoctorFormComponent: React.FC<FormComponentProps> = ({
       </div>
 
       <div className="flex flex-wrap gap-4">
+
         {/* City */}
         <div className="flex-1">
           <label className="block text-white text-lg mb-1 font-bold">City:</label>
@@ -167,14 +178,23 @@ const DoctorFormComponent: React.FC<FormComponentProps> = ({
       {/* Password */}
       <div className="mb-6">
         <label className="block text-white text-lg mb-1 font-bold">Password:</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="p-3 rounded-lg w-full bg-white bg-opacity-20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
-          value={formState.password}
-          onChange={handleInputChange}
-        />
+        <div className="relative">
+          <input
+            type={isPasswordVisible ? 'text' : 'password'}
+            name="password"
+            placeholder="Password"
+            className="p-3 rounded-lg w-full bg-white bg-opacity-20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            value={formState.password}
+            onChange={handleInputChange}
+          />
+          <span className='relative'>
+            <FontAwesomeIcon
+              icon={isPasswordVisible ? faEyeSlash : faEye}
+              onClick={togglePasswordVisibility}
+              className="absolute right-4 -bottom-0 text-gray-400 cursor-pointer"
+            />
+          </span>
+        </div>
       </div>
 
       {/* Submit Button */}
