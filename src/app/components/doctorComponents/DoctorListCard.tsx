@@ -1,4 +1,5 @@
 import { Doctor } from '@/types/doctorTypes';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 interface DoctorListCardProps {
@@ -6,6 +7,7 @@ interface DoctorListCardProps {
 }
 
 const DoctorListCard: React.FC<DoctorListCardProps> = ({ doctor }) => {
+  const router = useRouter();
   return (
     <div className="flex items-center justify-between bg-white p-6 rounded-lg shadow-md mb-4">
 
@@ -28,12 +30,16 @@ const DoctorListCard: React.FC<DoctorListCardProps> = ({ doctor }) => {
       </div>
 
       <div className="flex flex-col space-y-2 text-center">
-        {/*FIXME - Fix availability in the backend so a patient can view their availability and order around it*/}
-        <button className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md font-semibold transition duration-200">
+        <button 
+          className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md font-semibold transition duration-200"
+          onClick={() => router.push(`/patient/new-appointment/${doctor?.id}/availabilities`)}
+        >
           See Availability
         </button>
-        <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md font-semibold transition duration-200">
-          {/* FIXME - Create a doctor profile page and add a link to that here */}
+        <button 
+          className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md font-semibold transition duration-200"
+          onClick={() => router.push(`/doctors/${doctor?.id}`)}
+        >
           See Details
         </button>
       </div>

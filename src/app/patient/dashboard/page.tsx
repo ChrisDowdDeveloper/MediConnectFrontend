@@ -39,8 +39,7 @@ const PatientHomePage = () => {
   if (loading === true) {
     return (
       <div>
-        <Loader
-        />
+        <Loader />
       </div>
     );
   }

@@ -157,6 +157,49 @@ export const fetchDoctors = async() => {
   }
 
   const doctors = await response.json();
-  console.log(doctors)
   return doctors;
+}
+
+export const fetchDoctorById = async(doctorId: string) => {
+  const token = Cookies.get('token');
+  if(!token) {
+    throw new Error('No token found');
+  }
+
+  const response = await fetch(`${backendUrl}/doctor/${doctorId}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+  });
+
+  if(!response.ok) {
+    throw new Error(`Failed to fetch the doctor: ${doctorId}`);
+  }
+
+  const doctor = await response.json();
+  return doctor;
+}
+
+export const fetchAvailibilitiesById = async(doctorId: string) => {
+  const token = Cookies.get('token');
+  if(!token) {
+    throw new Error('No token found');
+  }
+
+  const response = await fetch(`${backendUrl}/Availability/Doctor/${doctorId}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+  });
+
+  if(!response.ok) {
+    throw new Error('Failed to fetch doctor availability');
+  }
+
+  const availability = await response.json();
+  return availability;
 }

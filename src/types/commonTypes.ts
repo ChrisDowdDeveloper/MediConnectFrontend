@@ -8,3 +8,12 @@ export interface Appointment {
     creationDate: Date;
     lastUpdatedDate: Date;
 }
+
+export interface TimeSlot {
+    id: number;
+    doctorId: string;
+    startDateTime: Date;
+    endDateTime: Date;
+    isBooked: boolean;
+    appointmentId: string;
+}

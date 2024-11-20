@@ -7,7 +7,6 @@ export interface Doctor {
     lastName: string;
     phoneNumber: string;
     specialty: string;
-    availability: string;
     yearsOfExperience: number;
     officeAddress: string;
     appointments: Appointment[];

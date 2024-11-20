@@ -12,10 +12,6 @@ const LoginPage = () => {
   const router = useRouter();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
-
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -51,16 +47,19 @@ const LoginPage = () => {
       </div>
       <div className="mb-6">
         <label className="block text-white text-lg mb-2 font-bold">Password:</label>
-        <div>
+        <div className="relative">
           <input
-            type="password"
+            type={isPasswordVisible ? "text" : "password"}
             placeholder="Password"
             className="p-3 rounded-lg w-full bg-white bg-opacity-20 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <span className='relative'>
-            <FontAwesomeIcon icon={isPasswordVisible ? faEyeSlash : faEye} onClick={togglePasswordVisibility} className='absolute right-4 -bottom-0 text-gray-400 cursor-pointer'/>
+          <span className="absolute right-4 top-3 text-gray-400 cursor-pointer">
+            <FontAwesomeIcon
+              icon={isPasswordVisible ? faEyeSlash : faEye}
+              onClick={() => setIsPasswordVisible((prev) => !prev)}
+            />
           </span>
         </div>
       </div>
