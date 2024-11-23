@@ -1,11 +1,16 @@
 import { Patient } from '@/types/patientTypes';
 import React from 'react';
+import { useRouter } from 'next/navigation';
+import { usePatient } from '@/context/PatientContext';
 
 interface PatientProfileCardProps {
   patient: Patient
 }
 
 const PatientProfileCard: React.FC<PatientProfileCardProps> = ({ patient }) => {
+  const router = useRouter();
+  const { setPatient } = usePatient();
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-8 flex flex-col md:flex-row md:items-center">
 
@@ -23,10 +28,20 @@ const PatientProfileCard: React.FC<PatientProfileCardProps> = ({ patient }) => {
       </div>
 
       <div className="flex flex-col md:ml-auto md:justify-end space-y-3 mt-4 md:mt-0">
-        <button className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg font-semibold transition duration-200">
+        <button 
+          className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg font-semibold transition duration-200"
+          onClick={() => {
+            setPatient(patient);
+            router.push("/patient/profile/edit")
+          }
+        }
+        >
           Edit Profile
         </button>
-        <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-lg font-semibold transition duration-200">
+        <button 
+          className="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-lg font-semibold transition duration-200"
+          onClick={() => {router.push("/patient/new-appointment")}}
+        >
           Create Appointment
         </button>
       </div>
