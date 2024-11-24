@@ -1,14 +1,12 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';  // Correct import from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import { registerPatient } from '@/utils/api';
-import { PatientFormState } from '@/types/patientFormTypes';
+import { PatientFormState } from '@/types/formTypes';
 
 const EmergencyContactForm = () => {
   const router = useRouter();
-
-  // Initialize form state for emergency contact details
   const [emergencyContact, setEmergencyContact] = useState({
     firstName: '',
     lastName: '',
@@ -18,7 +16,6 @@ const EmergencyContactForm = () => {
 
   const [patientInfo, setPatientInfo] = useState<PatientFormState | null>(null);
 
-  // Load the patient info from localStorage
   useEffect(() => {
     const savedPatientInfo = localStorage.getItem('patientInfo');
     if (savedPatientInfo) {
@@ -38,9 +35,8 @@ const EmergencyContactForm = () => {
     e.preventDefault();
     if (!patientInfo) {
       console.error("Patient information is missing.");
-      return;  // Stop the function if patientInfo is null
+      return;
     }
-    // Ensure patientInfo is an object before spreading
     const finalData = {
       firstName: patientInfo?.firstName || '',
       lastName: patientInfo?.lastName || '',
@@ -56,9 +52,8 @@ const EmergencyContactForm = () => {
     };
   
     try {
-      // Submit the complete data (patient info + emergency contact info)
       await registerPatient(finalData);
-      router.push('/login');  // Redirect to success page upon successful registration
+      router.push('/login');
     } catch (error) {
       console.error('Registration failed:', error);
     }

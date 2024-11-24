@@ -1,4 +1,4 @@
-import { PatientFormState } from '@/types/patientFormTypes';
+import { PatientFormState } from '@/types/formTypes';
 import { states } from '@/utils/states';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

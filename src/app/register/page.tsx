@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { PatientFormState } from '@/types/patientFormTypes';
+import { PatientFormState } from '@/types/formTypes';
 import PatientFormComponent from '../components/formComponents/PatientFormComponent';
 
 const RegisterPage = () => {
@@ -16,6 +16,7 @@ const RegisterPage = () => {
     address: '',
     email: '',
     password: '',
+    phoneNumber: '',
     emergencyContactFirstName: '',
     emergencyContactLastName: '',
     emergencyContactPhoneNumber: ''

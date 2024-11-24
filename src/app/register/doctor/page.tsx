@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { DoctorFormState, PatientFormState } from '@/types/patientFormTypes';
+import { DoctorFormState, PatientFormState } from '@/types/formTypes';
 import DoctorFormComponent from '@/app/components/formComponents/DoctorFormComponent';
 
 const DoctorRegisterPage = () => {

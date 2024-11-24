@@ -17,7 +17,6 @@ const PatientContext = createContext<PatientContextType | undefined>(undefined);
 
 export const usePatient = () => {
   const context = useContext(PatientContext);
-  console.log("Context value in usePatient:", context);
   if (!context) {
     throw new Error("usePatient must be used within a PatientProvider");
   }

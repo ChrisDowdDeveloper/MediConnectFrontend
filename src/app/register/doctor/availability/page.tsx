@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { registerDoctor } from '@/utils/api';
 import { times } from '@/utils/times';
-import { DoctorFormState } from '@/types/patientFormTypes';
+import { DoctorFormState } from '@/types/formTypes';
 
 type DayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
 

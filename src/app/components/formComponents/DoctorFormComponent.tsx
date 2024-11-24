@@ -1,4 +1,4 @@
-import { DoctorFormState } from '@/types/patientFormTypes';
+import { DoctorFormState } from '@/types/formTypes';
 import { states } from '@/utils/states';
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

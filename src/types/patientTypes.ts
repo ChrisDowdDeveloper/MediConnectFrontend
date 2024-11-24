@@ -1,6 +1,7 @@
 import { Appointment } from "./commonTypes";
 
 export interface Patient {
+    email: string;
     id: string;
     firstName: string;
     lastName: string;

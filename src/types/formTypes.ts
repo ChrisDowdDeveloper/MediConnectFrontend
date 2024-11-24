@@ -6,6 +6,7 @@ export interface PatientFormState {
     address: string;
     email: string;
     password: string;
+    phoneNumber: string;
     emergencyContactFirstName: string;
     emergencyContactLastName: string;
     emergencyContactPhoneNumber: string;
@@ -21,4 +22,16 @@ export interface DoctorFormState {
     password: string;
     userName: string;
     yearsOfExperience: number;
+}
+
+export interface UpdatePatientFormState {
+    firstName: string;
+    lastName: string;
+    dateOfBirth: string;
+    gender: string;
+    address: string;
+    phoneNumber: string;
+    emergencyContactFirstName: string;
+    emergencyContactLastName: string;
+    emergencyContactPhoneNumber: string;
 }

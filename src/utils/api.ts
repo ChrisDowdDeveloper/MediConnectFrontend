@@ -116,6 +116,34 @@ export const fetchPatientById = async() => {
   return patientData;
 }
 
+export const updatePatient = async(updatedPatientData: any) => {
+  const token = Cookies.get('token');
+  console.log(token)
+
+  if(!token) {
+    throw new Error('No token found');
+  }
+
+  const patientId = getIdFromToken();
+  console.log(patientId)
+
+  const response = await fetch(`${backendUrl}/patient/${patientId}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updatedPatientData)
+  });
+
+  if(!response.ok) {
+    throw new Error('Failed to update patient');
+  }
+  const patientData = await response.json();
+  console.log(patientData);
+
+}
+
 /**
  * Doctor API Calls
 */
