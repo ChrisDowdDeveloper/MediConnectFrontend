@@ -71,7 +71,7 @@ const EditPatientProfilePage = () => {
 
     try {
       await updatePatient(finalData);
-      // router.push('/patient/dashboard');
+      router.push('/patient/dashboard');
     } catch (error) {
       console.error("Update failed:", error);
     }

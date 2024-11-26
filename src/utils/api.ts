@@ -125,7 +125,6 @@ export const updatePatient = async(updatedPatientData: any) => {
   }
 
   const patientId = getIdFromToken();
-  console.log(patientId)
 
   const response = await fetch(`${backendUrl}/patient/${patientId}`, {
     method: 'PUT',
@@ -140,7 +139,7 @@ export const updatePatient = async(updatedPatientData: any) => {
     throw new Error('Failed to update patient');
   }
   const patientData = await response.json();
-  console.log(patientData);
+  return patientData;
 
 }
 
