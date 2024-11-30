@@ -1,3 +1,4 @@
+import { Availabilities } from "./availabilityTypes";
 import { Appointment } from "./commonTypes";
 
 export interface Doctor {
@@ -9,6 +10,7 @@ export interface Doctor {
     specialty: string;
     yearsOfExperience: number;
     officeAddress: string;
+    availabilities: Availabilities[];
     appointments: Appointment[];
     pastAppointments: Appointment[];
 }

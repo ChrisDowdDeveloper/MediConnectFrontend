@@ -22,8 +22,6 @@ const DoctorListCard: React.FC<DoctorListCardProps> = ({ doctor }) => {
           <p className="text-sm text-gray-500">Office Number: {doctor?.phoneNumber}</p>
           <p className="text-sm text-gray-500 truncate">📍 {doctor?.officeAddress}</p>
           <div className='flex flex-row justify-between'>
-            <p className='text-sm text-gray-500'>Office Hours: </p>
-            <p className="text-sm text-green-500">{doctor?.availability}</p>
           </div>
           
         </div>

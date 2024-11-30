@@ -1,11 +1,14 @@
 import { Doctor } from "@/types/doctorTypes";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 interface DoctorListCardProps {
   doctor: Doctor | null;
+  buttonVisible: boolean;
 }
 
-const PVDoctorProfileCard: React.FC<DoctorListCardProps> = ({ doctor }) => {
+const PVDoctorProfileCard: React.FC<DoctorListCardProps> = ({ doctor, buttonVisible }) => {
+  const router = useRouter();
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-8 flex flex-col items-center space-y-6 w-auto mx-auto">
 
@@ -32,15 +35,17 @@ const PVDoctorProfileCard: React.FC<DoctorListCardProps> = ({ doctor }) => {
           Address: {doctor?.officeAddress || "N/A"}
         </p>
       </div>
-
-      <div className="flex flex-row">
-        <button className="bg-green-600 hover:bg-green-700 text-white mx-2 py-2 px-6 rounded-lg font-semibold transition duration-200 w-full">
-          View Schedule
-        </button>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg font-semibold transition duration-200 w-full">
-          Make Appointment
-        </button>
-      </div>
+      {buttonVisible ?
+        <div className="flex flex-row">
+          <button 
+            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg font-semibold transition duration-200 w-full"
+            onClick={() => router.replace(`/patient/new-appointment/${doctor?.id}/availabilities`)}
+          >
+            Make Appointment
+          </button>
+        </div>
+      : null
+      }
     </div>
   );
 };

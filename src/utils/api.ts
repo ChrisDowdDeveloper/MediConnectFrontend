@@ -230,3 +230,26 @@ export const fetchAvailibilitiesById = async(doctorId: string) => {
   const availability = await response.json();
   return availability;
 }
+
+export const fetchAllTimeSlotsByDoctor = async(doctorId: string) => {
+  const token = Cookies.get('token');
+  if(!token) {
+    throw new Error('No token found');
+  }
+
+  const response = await fetch(`${backendUrl}/TimeSlot/Doctor/${doctorId}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+  });
+
+  if(!response.ok) {
+    throw new Error('Failed to fetch time slots by doctor id');
+  }
+
+  const timeslots = await response.json();
+  return timeslots;
+
+}

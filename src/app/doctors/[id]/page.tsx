@@ -52,7 +52,7 @@ const DoctorProfilePage = ({ params }: { params: { id: string } }) => {
           <p className="text-red-500 text-center">{error.message}</p>
         ) : doctor ? (
           <>
-            <PVDoctorProfileCard doctor={doctor} />
+            <PVDoctorProfileCard doctor={doctor} buttonVisible={true}/>
             <AvailabilityCard doctorId={params.id}/>
           </>
         ) : (
