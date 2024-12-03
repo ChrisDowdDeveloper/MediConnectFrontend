@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { fetchAvailibilitiesById } from "@/utils/api";
 import { Availabilities } from "@/types/availabilityTypes";
 import { dayNames } from "@/utils/dayNames";
+import { convertTo12HourFormat } from "@/utils/sharedFunctions";
 
 interface DoctorAvailabilityCardProps {
   doctorId: string;
@@ -10,13 +11,6 @@ interface DoctorAvailabilityCardProps {
 
 type ErrorState = {
   message: string;
-};
-
-const convertTo12HourFormat = (time: string): string => {
-  const [hour, minute] = time.split(":").map(Number);
-  const period = hour >= 12 ? "PM" : "AM";
-  const normalizedHour = hour % 12 || 12;
-  return `${normalizedHour}:${minute.toString().padStart(2, "0")} ${period}`;
 };
 
 const AvailabilityCard: React.FC<DoctorAvailabilityCardProps> = ({

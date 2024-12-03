@@ -1,10 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { fetchAllTimeSlotsByDoctor } from "@/utils/api";
+import { fetchAllTimeSlotsByDoctor, fetchAvailibilitiesById } from "@/utils/api";
 import { TimeSlot } from "@/types/timeSlotTypes";
+import { Doctor } from "@/types/doctorTypes";
+import { Availabilities } from "@/types/availabilityTypes";
+import { dayNames } from "@/utils/dayNames";
+import { getWeekRange } from "@/utils/sharedFunctions";
 
 interface TimeSlotCardProps {
   doctorId: string;
+  doctor?: Doctor | null;
 }
 
 type ErrorState = {
@@ -18,16 +23,19 @@ const convertTo12HourFormat = (time: string): string => {
   return `${normalizedHour}:${minute.toString().padStart(2, "0")} ${period}`;
 };
 
-const TimeSlotCard: React.FC<TimeSlotCardProps> = ({ doctorId }) => {
+const TimeSlotCard: React.FC<TimeSlotCardProps> = ({ doctor, doctorId }) => {
   const [timeSlots, setTimeSlots] = useState<TimeSlot[] | null>(null);
+  const [availabilities, setAvailabilities] = useState<Availabilities | null>(null);
   const [error, setError] = useState<ErrorState | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchDoctorTimeSlots = async () => {
+    const fetchDoctorAvailabilities = async () => {
       try {
         const slots = await fetchAllTimeSlotsByDoctor(doctorId);
+        const availability = await fetchAvailibilitiesById(doctorId);
         setTimeSlots(slots);
+        setAvailabilities(availability);
       } catch (err) {
         if (err instanceof Error) {
           setError({ message: err.message });
@@ -38,7 +46,7 @@ const TimeSlotCard: React.FC<TimeSlotCardProps> = ({ doctorId }) => {
         setLoading(false);
       }
     };
-    fetchDoctorTimeSlots();
+    fetchDoctorAvailabilities();
   }, [doctorId]);
 
   if (loading) {
@@ -49,7 +57,7 @@ const TimeSlotCard: React.FC<TimeSlotCardProps> = ({ doctorId }) => {
     );
   }
 
-  console.log(timeSlots);
+  console.log(availabilities);
 
   if (error) {
     return (
@@ -61,9 +69,19 @@ const TimeSlotCard: React.FC<TimeSlotCardProps> = ({ doctorId }) => {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Available Time Slots</h2>
+      <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Available Time Slots for Week: {getWeekRange()}</h2>
       <ul className="divide-y divide-gray-200">
-        {timeSlots?.map((slot) => (
+        {availabilities?.map((availability) => (
+            <li key={availability.id} className="py-4 flex justify-between">
+              <span className="font-medium text-gray-600">
+                {dayNames[availability.dayOfWeek as keyof typeof dayNames]}
+              </span>
+              <button>
+                --
+              </button>
+            </li>
+          ))}
+        {/*{timeSlots?.map((slot) => (
           <li key={slot.id} className="py-4 flex justify-between items-center">
             <div>
               <p className="font-medium text-gray-600">
@@ -85,7 +103,7 @@ const TimeSlotCard: React.FC<TimeSlotCardProps> = ({ doctorId }) => {
               </button>
             )}
           </li>
-        ))}
+        ))}*/}
       </ul>
     </div>
   );

@@ -58,8 +58,8 @@ const DoctorAvailabilityPage = ({ params }: { params: { id: string } }) => {
         ) : (
           <div>
             <PVDoctorProfileCard doctor={doctor} buttonVisible={false}/>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <TimeSlotCard doctorId={params.id} />
+            <div className="flex justify-center items-center">
+              <TimeSlotCard doctorId={params.id} doctor={doctor} />
             </div>
           </div>
         )}
