@@ -118,7 +118,6 @@ export const fetchPatientById = async() => {
 
 export const updatePatient = async(updatedPatientData: any) => {
   const token = Cookies.get('token');
-  console.log(token)
 
   if(!token) {
     throw new Error('No token found');
@@ -140,6 +139,39 @@ export const updatePatient = async(updatedPatientData: any) => {
   }
   const patientData = await response.json();
   return patientData;
+
+}
+
+export const createAppointment = async(notes: string, doctorId: string, timeSlotId: number, appointmentDate: string, appointmentTime: string) => {
+  const token = Cookies.get('token');
+  if(!token) {
+    throw new Error('No token found');
+  }
+
+  const appointmentDateTime = `${appointmentDate}T${appointmentTime}`;
+
+  const patientId = getIdFromToken();
+  const appointmentData = {
+    "patientId": patientId,
+    "doctorId": doctorId,
+    "appointmentDateTime": appointmentDateTime, 
+    "notes": notes
+  };
+  
+  const response = await fetch(`${backendUrl}/Appointment`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(appointmentData)
+  });
+  if(!response.ok) {
+    throw new Error('Failed to create the appointment')
+  }
+
+  const result = await response.json();
+  return result;
 
 }
 
@@ -209,7 +241,7 @@ export const fetchDoctorById = async(doctorId: string) => {
   return doctor;
 }
 
-export const fetchAvailibilitiesById = async(doctorId: string) => {
+export const fetchAvailibilitiesById = async(doctorId: string, date: Date) => {
   const token = Cookies.get('token');
   if(!token) {
     throw new Error('No token found');
@@ -252,4 +284,25 @@ export const fetchAllTimeSlotsByDoctor = async(doctorId: string) => {
   const timeslots = await response.json();
   return timeslots;
 
+}
+
+export const fetchTimeSlotsByAvailabilityId = async(availabilityId: number) => {
+  const token = Cookies.get('token');
+  if(!token) {
+    throw new Error('No token found');
+  }
+
+  const response = await fetch(`${backendUrl}/TimeSlot/Availability/${availabilityId}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+  });
+
+  if(!response.ok) {
+    throw new Error('Failed to fetch time slots by availability id');
+  }
+  const timeslots = await response.json();
+  return timeslots
 }

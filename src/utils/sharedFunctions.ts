@@ -5,14 +5,13 @@ export const convertTo12HourFormat = (time: string): string => {
     return `${normalizedHour}:${minute.toString().padStart(2, "0")} ${period}`;
 };
 
-export const getWeekRange = () => {
-    const today = new Date();
-    const firstDayOfWeek = new Date(today);
+export const getWeekRange = (currentDate: Date) => {
+    const firstDayOfWeek = new Date(currentDate);
   
     // Adjust to Monday
-    const dayOfWeek = today.getDay();
+    const dayOfWeek = firstDayOfWeek.getDay();
     const diffToMonday = (dayOfWeek === 0 ? -6 : 1) - dayOfWeek;
-    firstDayOfWeek.setDate(today.getDate() + diffToMonday);
+    firstDayOfWeek.setDate(currentDate.getDate() + diffToMonday);
   
     // Get Sunday
     const lastDayOfWeek = new Date(firstDayOfWeek);
@@ -24,5 +23,6 @@ export const getWeekRange = () => {
     const sunday = lastDayOfWeek.toLocaleDateString("en-US", options);
   
     return `${monday} - ${sunday}`;
-  }
+  };
+  
   

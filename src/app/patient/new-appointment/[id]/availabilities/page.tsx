@@ -3,16 +3,10 @@
 import React, { useEffect, useState } from "react";
 import PatientHeader from "@/app/components/patientComponents/PatientHeader";
 import { useRouter } from "next/navigation";
-import AvailabilityCard from "@/app/components/doctorComponents/AvailabilityCard";
 import { fetchDoctorById } from "@/utils/api";
 import { Doctor } from "@/types/doctorTypes";
-import TimeSlotCard from "@/app/components/doctorComponents/TimeSlotCard";
-import DoctorListCard from "@/app/components/doctorComponents/DoctorListCard";
+import DoctorAvailabilityCard from "@/app/components/doctorComponents/DoctorAvailabilityCard";
 import PVDoctorProfileCard from "@/app/components/patientComponents/PVDoctorProfileCard";
-
-interface DoctorAvailabilityPageProps {
-  params: { doctorId: string };
-}
 
 type ErrorState = {
   message: string;
@@ -59,7 +53,7 @@ const DoctorAvailabilityPage = ({ params }: { params: { id: string } }) => {
           <div>
             <PVDoctorProfileCard doctor={doctor} buttonVisible={false}/>
             <div className="flex justify-center items-center">
-              <TimeSlotCard doctorId={params.id} doctor={doctor} />
+              <DoctorAvailabilityCard doctorId={params.id} doctor={doctor} />
             </div>
           </div>
         )}

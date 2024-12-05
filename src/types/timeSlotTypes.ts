@@ -5,4 +5,4 @@ export interface TimeSlot {
     endTime: string;
     isBooked: boolean;
     appointmentId?: string;
-}[];
+};
