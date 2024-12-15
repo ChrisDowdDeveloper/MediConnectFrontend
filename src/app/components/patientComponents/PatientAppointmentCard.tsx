@@ -1,11 +1,13 @@
 import { Patient } from '@/types/patientTypes'
-import React from 'react'
+import Reactc from 'react'
+import UpcomingOrPastAppointmentCard from './UpcomingOrPastAppointmentCard';
 
 interface PatientAppointmentCardProps {
   patient: Patient | null;
 }
 
 const PatientAppointmentCard: React.FC<PatientAppointmentCardProps> = ({ patient }) => {
+
   if (!patient) {
     return <div>No patient information available</div>;
   }
@@ -21,11 +23,10 @@ const PatientAppointmentCard: React.FC<PatientAppointmentCardProps> = ({ patient
 
   return (
     <>
-      <h2>Future Appointments for {patient.firstName} {patient.lastName}</h2>
       <ul>
         {patient.appointments.map((appointment, index) => (
-          <li key={index}>
-            {appointment.appointmentDateTime.toLocaleDateString()} with {appointment.doctorId}
+          <li key={index} className='px-3 pb-4'>
+            <UpcomingOrPastAppointmentCard appointment={appointment}/>
           </li>
         ))}
       </ul>

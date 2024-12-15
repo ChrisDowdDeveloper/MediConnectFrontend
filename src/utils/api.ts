@@ -38,8 +38,6 @@ export const login = async (userNameOrEmail: string, password: string) => {
 
   Cookies.set('token', token, {expires: 1});
 
-  const patientId = getIdFromToken();
-
   return data;
 };
 

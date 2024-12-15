@@ -1,3 +1,5 @@
+import { Doctor } from "./doctorTypes";
+
 export interface Appointment {
     id: number;
     patientId: string;
@@ -7,4 +9,5 @@ export interface Appointment {
     notes: string;
     creationDate: Date;
     lastUpdatedDate: Date;
+    doctor: Doctor;
 }

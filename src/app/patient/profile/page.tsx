@@ -66,7 +66,7 @@ const PatientProfilePage: React.FC = () => {
                       patient.appointments.map((appointment, index) => (
                         <li key={index} className="flex justify-between items-center p-3 bg-gray-100 rounded-lg">
                           <div>
-                            <p className="text-gray-700 font-semibold">{appointment.doctorId}</p>
+                            <p className="text-gray-700 font-semibold">Dr. {appointment.doctor.firstName} {appointment.doctor.lastName}</p>
                             <p className="text-gray-500 text-sm">
                               {new Date(appointment.appointmentDateTime).toLocaleDateString()} at {new Date(appointment.appointmentDateTime).toLocaleTimeString()}.
                             </p>

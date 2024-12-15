@@ -1,4 +1,4 @@
-import { TimeSlot } from "./commonTypes";
+import { TimeSlot } from "./timeSlotTypes";
 
 export type Availabilities = {
     dayOfWeek: number;

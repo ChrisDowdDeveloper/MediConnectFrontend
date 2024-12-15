@@ -54,24 +54,37 @@ const EditPatientProfilePage = () => {
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
+
+    if (name === "state") {
+      setAddressFields((prevFields) => ({
+        ...prevFields,
+        [name]: value,
+      }));
+    } else {
+      setFormState((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+  
     const combinedAddress = `${addressFields.street}, ${addressFields.city}, ${addressFields.state} ${addressFields.zipCode}`;
-
+  
     const finalData = {
       ...formState,
       address: combinedAddress,
     };
-
+  
+    console.log("Final data being sent:", finalData);
+  
     try {
       await updatePatient(finalData);
-      router.push('/patient/dashboard');
+      console.log("Update finished");
+      // router.push('/patient/dashboard');
     } catch (error) {
       console.error("Update failed:", error);
     }
