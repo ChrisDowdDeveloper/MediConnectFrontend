@@ -22,10 +22,27 @@ const UpcomingOrPastAppointmentCard: React.FC<UpcomingOrPastAppointmentProps> = 
                 <p className="text-sm text-gray-600">
                     <strong>Specialty:</strong> {appointment?.doctor.specialty}
                 </p>
+                {appointment?.appointmentStatus === "BOOKED" ? (
+                    <p className="text-sm font-semibold text-green-500">
+                        {appointment?.appointmentStatus}
+                    </p>
+                ) : (
+                    <p className="text-sm font-semibold text-red-500">
+                        {appointment?.appointmentStatus}
+                    </p>
+                )}
             </div>
-            <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
-                View Details
-            </button>
+            <div>
+                <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+                    View Details
+                </button>
+                <button className='ml-4 px-4 py-2 bg-red-500 text-white rounded-lg hover: hover:bg-red-600 transition'>
+                    Cancel Appointment
+                </button>
+                <button className='ml-4 px-4 py-2 bg-green-500 text-white rounded-lg hover: hover:bg-green-600 transition'>
+                    Reschedule
+                </button>
+            </div>
         </div>
   )
 }

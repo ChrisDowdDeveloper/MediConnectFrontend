@@ -15,7 +15,6 @@ const PatientAppointmentCard: React.FC<PatientAppointmentCardProps> = ({ patient
   if(patient.appointments.length == 0) {
     return (
       <div>
-        <h2><b>Appointments for {patient.firstName} {patient.lastName}</b></h2>
         No appointments scheduled yet
       </div>
     )

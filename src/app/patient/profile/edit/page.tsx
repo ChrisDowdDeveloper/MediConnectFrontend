@@ -71,20 +71,15 @@ const EditPatientProfilePage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
     const combinedAddress = `${addressFields.street}, ${addressFields.city}, ${addressFields.state} ${addressFields.zipCode}`;
-  
     const finalData = {
       ...formState,
       address: combinedAddress,
     };
   
-    console.log("Final data being sent:", finalData);
-  
     try {
       await updatePatient(finalData);
-      console.log("Update finished");
-      // router.push('/patient/dashboard');
+      router.push('/patient/dashboard');
     } catch (error) {
       console.error("Update failed:", error);
     }
