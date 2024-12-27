@@ -17,10 +17,10 @@ const UpcomingOrPastAppointmentCard: React.FC<UpcomingOrPastAppointmentProps> = 
                     <strong>Time:</strong> {normalizeTime(appointment?.appointmentDateTime)}
                 </p>
                 <p className="text-lg font-semibold text-gray-800">
-                    Dr. {appointment?.doctor.firstName} {appointment?.doctor.lastName}
+                    {/* Dr. {appointment?.doctor.firstName} {appointment?.doctor.lastName}*/}
                 </p>
                 <p className="text-sm text-gray-600">
-                    <strong>Specialty:</strong> {appointment?.doctor.specialty}
+                    {/*<strong>Specialty:</strong> {appointment?.doctor.specialty}*/}
                 </p>
                 {appointment?.appointmentStatus === "BOOKED" ? (
                     <p className="text-sm font-semibold text-green-500">
