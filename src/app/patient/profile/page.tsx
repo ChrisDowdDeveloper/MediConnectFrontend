@@ -7,6 +7,7 @@ import Loader from '@/app/components/shared/Loader';
 import { Patient } from '@/types/patientTypes';
 import { fetchPatientById } from '@/utils/api';
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 type ErrorState = {
   message: string;
@@ -16,6 +17,7 @@ const PatientProfilePage: React.FC = () => {
   const [patient, setPatient] = useState<Patient | null>(null);
   const [error, setError] = useState<ErrorState | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchPatientData = async () => {
@@ -55,9 +57,6 @@ const PatientProfilePage: React.FC = () => {
         ) : patient ? (
           <>
             <PatientProfileCard patient={patient} />
-
-            
-  
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
               <div className="bg-white rounded-lg shadow-lg p-6">
                   <h2 className="text-2xl font-semibold text-gray-800 mb-4">Upcoming Appointments</h2>
@@ -71,7 +70,7 @@ const PatientProfilePage: React.FC = () => {
                               {new Date(appointment.appointmentDateTime).toLocaleDateString()} at {new Date(appointment.appointmentDateTime).toLocaleTimeString()}.
                             </p>
                           </div>
-                          <button className="text-blue-500 hover:underline">View Details</button>
+                          <button className="text-blue-500 hover:underline" onClick={() => router.push(`appointments/${appointment.id}`)}>View Details</button>
                         </li>
                       ))
                     ) : (

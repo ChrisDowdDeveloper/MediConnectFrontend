@@ -173,6 +173,28 @@ export const createAppointment = async(notes: string, doctorId: string, timeSlot
 
 }
 
+export const fetchAppointmentById = async(appointmentId: string) => {
+  const token = Cookies.get('token');
+  if(!token) {
+    throw new Error('No token found');
+  }
+
+  const response = await fetch(`${backendUrl}/Appointment/${appointmentId}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  if(!response.ok) {
+    throw new Error('Failed to find appointment')
+  }
+
+  const result = await response.json();
+  console.log(result)
+  return result;
+}
+
 /**
  * Doctor API Calls
 */

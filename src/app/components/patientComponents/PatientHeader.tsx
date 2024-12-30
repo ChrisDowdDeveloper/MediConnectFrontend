@@ -7,7 +7,6 @@ const PatientHeader = () => {
         <nav>
         <ul className="flex space-x-6">
             <li><a href="/patient/profile" className="hover:underline">Profile</a></li>
-            <li><a href="/patient/appointments" className="hover:underline">Appointments</a></li>
             <li><a href="/patient/dashboard" className="hover:underline">Dashboard</a></li>
         </ul>
         </nav>
