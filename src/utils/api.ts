@@ -191,7 +191,27 @@ export const fetchAppointmentById = async(appointmentId: string) => {
   }
 
   const result = await response.json();
-  console.log(result)
+  return result;
+}
+
+export const cancelAppointmentById = async(appointmentId: number) => {
+  const token = Cookies.get('token');
+  if(!token) {
+    throw new Error('No token found');
+  }
+
+  const response = await fetch(`${backendUrl}/Appointment/${appointmentId}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  if(!response.ok) {
+    throw new Error('Failed to cancel the appointment')
+  }
+
+  const result = await response.json();
   return result;
 }
 
