@@ -11,8 +11,6 @@ const AppointmentPage = ({ params }: { params: { id: string } }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  console.log(params.id)
-
   useEffect(() => {
 
     const fetchAppointment = async () => {

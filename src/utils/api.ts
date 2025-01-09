@@ -215,6 +215,28 @@ export const cancelAppointmentById = async(appointmentId: number) => {
   return result;
 }
 
+export const rescheduleAppointmentById = async(appointmentId: number, rescheduledAppointment: any) => {
+  const token = Cookies.get('token');
+  if(!token) {
+    throw new Error('No token found');
+  }
+
+  const response = await fetch(`${backendUrl}/Appointment/${appointmentId}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ rescheduledAppointment })
+  });
+  if(!response.ok) {
+    throw new Error('Failed to reschedule appointment')
+  }
+
+  const result = await response.json();
+  return result;
+}
+
 /**
  * Doctor API Calls
 */
