@@ -72,13 +72,17 @@ const AppointmentReschedulePage = ({ params }: { params: { id: string } }) => {
   
 
   const rescheduleAppointment = async () => {
+
     if (!selectedTime) {
       alert('Please select a new time slot.');
       return;
     }
-  
+    console.log(selectedTime)
     const rescheduledAppointment = {
-      newTime: selectedTime,
+      patientId: appointment?.patientId,
+      doctorId: appointment?.doctor.id,
+      appointmentDateTime: new Date(selectedTime).toISOString(),
+      appointmentStatus: appointment?.appointmentStatus
     };
   
     try {
